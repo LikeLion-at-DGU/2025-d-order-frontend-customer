@@ -5,63 +5,63 @@ const GlobalStyle = createGlobalStyle`
 /* SUIT 폰트 설정 */
 @font-face {
   font-family: 'SUIT-ExtraBold';
-  src: url('/public/fonts/SUIT-ExtraBold.otf') format('opentype');
+  src: url('/fonts/SUIT-ExtraBold.otf') format('opentype');
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SUIT-Bold';
-  src: url('/public/fonts/SUIT-Bold.otf') format('opentype');
+  src: url('/fonts/SUIT-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SUIT-SemiBold';
-  src: url('/public/fonts/SUIT-SemiBold.otf') format('opentype');
+  src: url('/fonts/SUIT-SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SUIT-Medium';
-  src: url('/public/fonts/SUIT-Medium.otf') format('opentype');
+  src: url('/fonts/SUIT-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SUIT-Regular';
-  src: url('/public/fonts/SUIT-Regular.otf') format('opentype');
+  src: url('/fonts/SUIT-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SUIT-Light';
-  src: url('/public/fonts/SUIT-Light.otf') format('opentype');
+  src: url('/fonts/SUIT-Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SUIT-ExtraLight';
-  src: url('/public/fonts/SUIT-ExtraLight.otf') format('opentype');
+  src: url('/fonts/SUIT-ExtraLight.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SUIT-Thin';
-  src: url('/public/fonts/SUIT-Thin.otf') format('opentype');
+  src: url('/fonts/SUIT-Thin.otf') format('opentype');
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
     font-family:"OmyuPretty";
-    src: url("public/fonts/omyu-pretty.ttf");
+    src: url("/fonts/omyu-pretty.ttf");
 }
 
 // 초기 html 설정
