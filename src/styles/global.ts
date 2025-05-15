@@ -84,7 +84,7 @@ body {
 
 	overflow-x: hidden;
 
-	background-color: ${({ theme }) => theme.colors.White};
+	background-color: ${({ theme }) => theme.colors.Bg};
 	color: ${({ theme }) => theme.colors.Black01};
   font-family: 'SUIT-Regular', sans-serif;
   line-height: 1.5;

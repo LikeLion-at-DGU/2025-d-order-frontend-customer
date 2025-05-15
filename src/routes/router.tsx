@@ -8,7 +8,7 @@ import MainPage from "@pages/main/MainPage";
 import LoginPage from "@pages/login/LoginPage";
 
 const router = createBrowserRouter([
-  { path: "/", children: [{ path: "", element: <LoginPage /> }] },
+  // { path: "/", children: [{ path: "", element: <LoginPage /> }] },
   {
     path: "/",
     element: <DefaultLayout />,
