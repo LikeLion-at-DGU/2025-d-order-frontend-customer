@@ -135,6 +135,7 @@ const useMenuListPage = () => {
     handleFirstModal,
     handleSecondModal,
     handleNavigate: () => navigate('/'),
+    handleReceipt: () => navigate('/'),
     count,
     isMin,
     isMax,

@@ -6,6 +6,7 @@ import MenuListPageHeader from './components/MenuListPageHeader/MenuListPageHead
 import MenuList from './components/MenuList/MenuList';
 import MenuAssignModal from './components/modals/MenuAssignModal/MenuAssignModal';
 import MenuAssignSidModal from './components/modals/menuAssignSideModal/MenuAssignSideModal';
+import MenuListHeader from './components/Header/MenuListHeader';
 
 const MenulistPage = () => {
   const {
@@ -22,6 +23,7 @@ const MenulistPage = () => {
     handleFirstModal,
     handleSecondModal,
     handleNavigate,
+    handleReceipt,
     count,
     isMin,
     isMax,
@@ -31,6 +33,7 @@ const MenulistPage = () => {
   } = useMenuListPage();
   return (
     <S.Wrapper>
+      <MenuListHeader onNavigate={handleNavigate} onReceipt={handleReceipt} />
       <MenuListPageHeader
         title={'멋쟁이사자처럼'}
         tableNumber={1}

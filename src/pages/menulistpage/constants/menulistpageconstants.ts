@@ -1,6 +1,13 @@
 import { IMAGE_CONSTANTS } from '@constants/ImageConstants';
 
 export const MENULISTPAGE_CONSTANTS = {
+  HEADER: {
+    IMAGE: {
+      LOGO: IMAGE_CONSTANTS.LOGO,
+      CART: IMAGE_CONSTANTS.CART,
+      RECEIPT: IMAGE_CONSTANTS.RECEIPT,
+    },
+  },
   ASSIGNMODAL: {
     IMAGES: {
       NOTICE: IMAGE_CONSTANTS.Notice,
