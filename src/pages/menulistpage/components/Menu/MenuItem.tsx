@@ -25,7 +25,7 @@ const MenuItem = ({ item, onClick }: MenuItemProps) => {
   };
   return (
     <S.Wrapper
-      soldOut={item.soldOut}
+      $soldout={item.soldOut}
       disabled={isTableFeeAndSoldOut}
       onClick={handleClick}
     >

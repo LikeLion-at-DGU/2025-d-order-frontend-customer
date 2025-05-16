@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div<{ soldOut?: boolean; disabled?: boolean }>`
+export const Wrapper = styled.div<{ $soldout?: boolean; disabled?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-  opacity: ${({ soldOut }) => (soldOut ? 0.4 : 1)};
+  opacity: ${({ $soldout }) => ($soldout ? 0.4 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
-  cursor: ${({ disabled, soldOut }) =>
-    disabled || soldOut ? 'default' : 'pointer'};
+  cursor: ${({ disabled, $soldout }) =>
+    disabled || $soldout ? 'default' : 'pointer'};
 `;
 
 export const Row = styled.div`
