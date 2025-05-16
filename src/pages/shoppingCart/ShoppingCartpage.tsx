@@ -18,7 +18,7 @@ interface ShoppingItem {
 const ShoppingCartPage = () => {
   const [ShoppingList, setShoppingList] = useState<ShoppingItem[] | null>(null);
   const navigate = useNavigate();
-  const [isConfirmModal, setisConfirmModal] = useState<boolean>(true);
+  const [isConfirmModal, _setisConfirmModal] = useState<boolean>(false);
 
   useEffect(() => {
     setShoppingList([
