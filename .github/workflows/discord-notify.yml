@@ -10,6 +10,8 @@ on:
 jobs:
   notify-discord:
     runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
       - name: Send PR embed message to Discord
         run: |
@@ -17,9 +19,8 @@ jobs:
           IS_MERGED="${{ github.event.pull_request.merged }}"
           BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
 
-          # 메시지 제목 및 색상 지정
           TITLE="📌 PR 이벤트: ${{ github.event.pull_request.title }}"
-          COLOR=15844367  # 주황색
+          COLOR=15844367  # 주황
 
           if [ "$ACTION_TYPE" = "closed" ] && [ "$IS_MERGED" = "true" ]; then
             if [ "$BASE_BRANCH" = "main" ]; then
@@ -32,28 +33,28 @@ jobs:
           fi
 
           curl -H "Content-Type: application/json" \
-          -X POST ${{ secrets.DISCORD_WEBHOOK }} \
-          -d "{
-            \"username\": \"GitHub Actions\",
-            \"avatar_url\": \"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png\",
-            \"embeds\": [{
-              \"title\": \"${TITLE}\",
-              \"color\": ${COLOR},
-              \"fields\": [
-                {
-                  \"name\": \"📂 브랜치\",
-                  \"value\": \"${{ github.event.pull_request.head.ref }} → ${{ github.event.pull_request.base.ref }}\"
-                },
-                {
-                  \"name\": \"👤 작성자\",
-                  \"value\": \"${{ github.actor }}\",
-                  \"inline\": true
-                },
-                {
-                  \"name\": \"🔗 PR 링크\",
-                  \"value\": \"[PR 보기](${{ github.event.pull_request.html_url }})\"
-                }
-              ],
-              \"timestamp\": \"$(date --iso-8601=seconds)\"
-            }]
-          }"
+               -X POST "$DISCORD_WEBHOOK" \
+               -d "{
+                \"username\": \"GitHub Actions\",
+                \"avatar_url\": \"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png\",
+                \"embeds\": [{
+                  \"title\": \"${TITLE}\",
+                  \"color\": ${COLOR},
+                  \"fields\": [
+                    {
+                      \"name\": \"📂 브랜치\",
+                      \"value\": \"${{ github.event.pull_request.head.ref }} → ${{ github.event.pull_request.base.ref }}\"
+                    },
+                    {
+                      \"name\": \"👤 작성자\",
+                      \"value\": \"${{ github.actor }}\",
+                      \"inline\": true
+                    },
+                    {
+                      \"name\": \"🔗 PR 링크\",
+                      \"value\": \"[PR 보기](${{ github.event.pull_request.html_url }})\"
+                    }
+                  ],
+                  \"timestamp\": \"$(date --iso-8601=seconds)\"
+                }]
+              }"
