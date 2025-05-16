@@ -18,19 +18,19 @@ interface ShoppingItem {
 const ShoppingCartPage = () => {
   const [ShoppingList, setShoppingList] = useState<ShoppingItem[] | null>(null);
   const navigate = useNavigate();
-  const [isConfirmModal, setisConfirmModal] = useState<boolean>(true);
+  const [isConfirmModal, setisConfirmModal] = useState<boolean>(false);
 
-  useEffect(() => {
-    setShoppingList([
-      {
-        id: 1,
-        name: "피자",
-        price: 20000,
-        image: "https://example.com/image.jpg",
-        quantity: 1,
-      },
-    ]);
-  }, []);
+  // useEffect(() => {
+  //   setShoppingList([
+  //     {
+  //       id: 1,
+  //       name: "피자",
+  //       price: 20000,
+  //       image: "https://example.com/image.jpg",
+  //       quantity: 1,
+  //     },
+  //   ]);
+  // }, []);
   return (
     <Wrapper>
       <ShoppingHeader
@@ -97,6 +97,5 @@ const DarkWrapper = styled.div`
   height: 100vh;
 
   background-color: rgba(0, 0, 0, 0.4);
-
   z-index: 11;
 `;
