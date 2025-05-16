@@ -2,6 +2,8 @@ import * as S from './MenuList.styled';
 
 import MenuItem from '../Menu/MenuItem';
 
+import { MENULISTPAGE_CONSTANTS } from '@pages/menulistpage/constants/menulistpageconstants';
+
 type Category = 'menu' | 'tableFee' | 'drink';
 
 interface MenuItemType {
@@ -34,7 +36,9 @@ const MenuList = ({ items, sectionRefs, onOpenModal }: MenuListProps) => {
   return (
     <S.Wrapper>
       <S.Section ref={sectionRefs.tableFee}>
-        <S.SectionTitle>테이블 이용료</S.SectionTitle>
+        <S.SectionTitle>
+          {MENULISTPAGE_CONSTANTS.LISTPAGEHEADER.TEXT.TABELFEE}
+        </S.SectionTitle>
         <S.List>
           {tableFees.map((item) => (
             <MenuItem key={item.id} item={item} onClick={onOpenModal} />
@@ -43,7 +47,9 @@ const MenuList = ({ items, sectionRefs, onOpenModal }: MenuListProps) => {
       </S.Section>
 
       <S.Section ref={sectionRefs.menu}>
-        <S.SectionTitle>메뉴</S.SectionTitle>
+        <S.SectionTitle>
+          {MENULISTPAGE_CONSTANTS.LISTPAGEHEADER.TEXT.MENU}
+        </S.SectionTitle>
         <S.List>
           {menus.map((item) => (
             <MenuItem key={item.id} item={item} onClick={onOpenModal} />
@@ -52,7 +58,9 @@ const MenuList = ({ items, sectionRefs, onOpenModal }: MenuListProps) => {
       </S.Section>
 
       <S.Section ref={sectionRefs.drink}>
-        <S.SectionTitle>음료</S.SectionTitle>
+        <S.SectionTitle>
+          {MENULISTPAGE_CONSTANTS.LISTPAGEHEADER.TEXT.BEVERAGE}
+        </S.SectionTitle>
         {drinks.map((item) => (
           <MenuItem key={item.id} item={item} onClick={onOpenModal} />
         ))}

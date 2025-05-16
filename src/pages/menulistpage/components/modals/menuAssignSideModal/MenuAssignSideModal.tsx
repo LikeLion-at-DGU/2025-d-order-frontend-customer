@@ -1,5 +1,6 @@
 import * as S from './MenuAssignSideModal.styled';
 
+import { MENULISTPAGE_CONSTANTS } from '@pages/menulistpage/constants/menulistpageconstants';
 interface MenuAssignSidModalProps {
   onClose: () => void;
   onNavigate: () => void;
@@ -14,13 +15,13 @@ const MenuAssignSidModal = ({
       <S.BackWrap onClick={onClose} />
       <S.ModalWrap>
         <S.Col>
-          <S.Title>장바구니에 추가되었어요!</S.Title>
+          <S.Title>{MENULISTPAGE_CONSTANTS.ASSIGNSIDEMODAL.TEXT.Title}</S.Title>
           <S.ButtonWrap>
             <S.CancelButton onClick={onNavigate}>
-              장바구니로 이동
+              {MENULISTPAGE_CONSTANTS.ASSIGNSIDEMODAL.TEXT.MoveToBowl}
             </S.CancelButton>
             <S.ConfirmButton onClick={onClose}>
-              다른 메뉴 더 보기
+              {MENULISTPAGE_CONSTANTS.ASSIGNSIDEMODAL.TEXT.MoreMenu}
             </S.ConfirmButton>
           </S.ButtonWrap>
         </S.Col>
