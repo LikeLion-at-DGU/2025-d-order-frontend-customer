@@ -1,24 +1,26 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 
 // components
-import DefaultLayout from "@components/layout/DefaultLayout";
+import DefaultLayout from '@components/layout/DefaultLayout';
+
+import { ROUTE_CONSTANTS } from '@constants/RouteConstants';
 
 // pages
-import MainPage from "@pages/main/MainPage";
-import LoginPage from "@pages/login/LoginPage";
-import MenulistPage from "@pages/menulistpage/MenuListPage";
-import ShoppingCartPage from "@pages/shoppingCart/ShoppingCartpage";
+import MainPage from '@pages/main/MainPage';
+import LoginPage from '@pages/login/LoginPage';
+import MenulistPage from '@pages/menulistpage/MenuListPage';
+import ShoppingCartPage from '@pages/shoppingCart/ShoppingCartpage';
 
 const router = createBrowserRouter([
   //{ path: '/', children: [{ path: '', element: <LoginPage /> }] },
   {
-    path: "/",
+    path: ROUTE_CONSTANTS.HOME,
     element: <DefaultLayout />,
     children: [
-      { path: "", element: <LoginPage /> },
-      { path: "/main", element: <MainPage /> },
-      { path: "/ShoppingCart", element: <ShoppingCartPage /> },
-      { path: "/menulist", element: <MenulistPage /> },
+      { path: ROUTE_CONSTANTS.LOGIN, element: <LoginPage /> },
+      { path: ROUTE_CONSTANTS.MAIN, element: <MainPage /> },
+      { path: ROUTE_CONSTANTS.SHOPPINGCART, element: <ShoppingCartPage /> },
+      { path: ROUTE_CONSTANTS.MENULIST, element: <MenulistPage /> },
     ],
   },
 ]);
