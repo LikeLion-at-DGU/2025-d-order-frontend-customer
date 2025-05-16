@@ -7,7 +7,8 @@ export const Wrapper = styled.div<{ $soldout?: boolean; disabled?: boolean }>`
   align-items: center;
 
   opacity: ${({ $soldout }) => ($soldout ? 0.4 : 1)};
-  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+  pointer-events: ${({ disabled, $soldout }) =>
+    disabled || $soldout ? 'none' : 'auto'};
   cursor: ${({ disabled, $soldout }) =>
     disabled || $soldout ? 'default' : 'pointer'};
 `;
@@ -37,9 +38,11 @@ export const ItemName = styled.div`
   color: ${({ theme }) => theme.colors.Black01};
 `;
 
-export const ItemDes = styled.div`
-  ${({ theme }) => theme.fonts.SemiBold12};
-  color: ${({ theme }) => theme.colors.Black01};
+export const ItemDes = styled.div<{ $soldout?: boolean; disabled?: boolean }>`
+  ${({ theme, $soldout }) =>
+    $soldout ? theme.fonts.ExtraBold12 : theme.fonts.SemiBold12};
+  color: ${({ theme, $soldout }) =>
+    $soldout ? theme.colors.Orange01 : theme.colors.Black01};
 `;
 
 export const ItemPrice = styled.div`

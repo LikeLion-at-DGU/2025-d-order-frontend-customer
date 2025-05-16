@@ -33,7 +33,9 @@ const MenuItem = ({ item, onClick }: MenuItemProps) => {
         <S.MenuImage src={item.imageUrl} />
         <S.Col>
           <S.ItemName>{item.name}</S.ItemName>
-          <S.ItemDes>{item.soldOut ? 'SOLD OUT' : item.description}</S.ItemDes>
+          <S.ItemDes $soldout={item.soldOut}>
+            {item.soldOut ? 'SOLD OUT' : item.description}
+          </S.ItemDes>
         </S.Col>
       </S.Row>
       <S.ItemPrice>{item.price.toLocaleString()}원</S.ItemPrice>
