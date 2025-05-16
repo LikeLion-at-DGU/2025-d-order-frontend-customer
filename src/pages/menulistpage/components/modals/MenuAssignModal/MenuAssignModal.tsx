@@ -1,15 +1,15 @@
 import * as S from './MenuAssignModal.styled';
 
-import { useState, useEffect } from 'react';
-
 import { MENULISTPAGE_CONSTANTS } from '@pages/menulistpage/constants/menulistpageconstants';
 
 interface MenuAssignModalProps {
-  item: {
-    name: string;
-    price: number;
-    quantity: number;
-  };
+  item: { name: string; price: number; quantity: number };
+  count: number;
+  isMin: boolean;
+  isMax: boolean;
+  showToast: boolean;
+  onDecrease: () => void;
+  onIncrease: () => void;
   onClose: () => void;
   onSubmit: () => void;
   isClosing: boolean;
@@ -17,35 +17,16 @@ interface MenuAssignModalProps {
 
 const MenuAssignModal = ({
   item,
+  count,
+  isMin,
+  isMax,
+  showToast,
+  onDecrease,
+  onIncrease,
   onClose,
   onSubmit,
   isClosing,
 }: MenuAssignModalProps) => {
-  const [count, setCount] = useState(1);
-  const [showToast, setShowToast] = useState(false);
-
-  const isMin = count <= 1;
-  const isMax = count > item.quantity;
-  const isMax2 = count >= item.quantity;
-
-  const handleDecrease = () => {
-    if (!isMin) setCount((prev) => prev - 1);
-  };
-
-  const handleIncrease = () => {
-    if (isMax2) {
-      setShowToast(true);
-    }
-    setCount((prev) => prev + 1);
-  };
-
-  useEffect(() => {
-    if (showToast) {
-      const timeout = setTimeout(() => setShowToast(false), 2000);
-      return () => clearTimeout(timeout);
-    }
-  }, [showToast]);
-
   return (
     <S.Wrapper>
       <S.BackWrap onClick={onClose} />
@@ -62,11 +43,11 @@ const MenuAssignModal = ({
           <S.Row2>
             <S.QuantityBox>
               <S.QuantityText>수량</S.QuantityText>
-              <S.QuantityButton disabled={isMin} onClick={handleDecrease}>
+              <S.QuantityButton disabled={isMin} onClick={onDecrease}>
                 -
               </S.QuantityButton>
               <S.Quantity>{count}</S.Quantity>
-              <S.QuantityButton disabled={isMax} onClick={handleIncrease}>
+              <S.QuantityButton disabled={isMax} onClick={onIncrease}>
                 +
               </S.QuantityButton>
             </S.QuantityBox>
