@@ -6,19 +6,16 @@ import { useEffect, useState } from "react";
 import ShoppingItem from "./_components/ShoppingItem";
 import ShoppingFooter from "./_components/ShoppingFooter";
 import ConfirmModal from "./_modal/ConfitmMotal";
-
-interface ShoppingItem {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
+import { ShoppingItemType } from "./types/types";
+import SendMoneyModal from "./_modal/sendMoneyModal";
 
 const ShoppingCartPage = () => {
-  const [ShoppingList, setShoppingList] = useState<ShoppingItem[] | null>(null);
+  const [ShoppingList, setShoppingList] = useState<ShoppingItemType[] | null>(
+    null
+  );
   const navigate = useNavigate();
   const [isConfirmModal, _setisConfirmModal] = useState<boolean>(false);
+  const [isSendMoneyModal, _setIsSendMoneyModal] = useState<boolean>(true);
 
   useEffect(() => {
     setShoppingList([
@@ -28,15 +25,94 @@ const ShoppingCartPage = () => {
         price: 20000,
         image: "https://example.com/image.jpg",
         quantity: 1,
+        inventory: 10,
+      },
+      {
+        id: 2,
+        name: "피자2",
+        price: 20000,
+        image: "https://example.com/image.jpg",
+        quantity: 1,
+        inventory: 10,
+      },
+      {
+        id: 3,
+        name: "피자3",
+        price: 20000,
+        image: "https://example.com/image.jpg",
+        quantity: 1,
+        inventory: 10,
+      },
+      {
+        id: 4,
+        name: "피자4",
+        price: 20000,
+        image: "https://example.com/image.jpg",
+        quantity: 1,
+        inventory: 10,
+      },
+      {
+        id: 5,
+        name: "피자5",
+        price: 20000,
+        image: "https://example.com/image.jpg",
+        quantity: 1,
+        inventory: 10,
+      },
+      {
+        id: 6,
+        name: "피자6",
+        price: 20000,
+        image: "https://example.com/image.jpg",
+        quantity: 1,
+        inventory: 10,
+      },
+      {
+        id: 7,
+        name: "피자7",
+        price: 20000,
+        image: "https://example.com/image.jpg",
+        quantity: 1,
+        inventory: 10,
+      },
+      {
+        id: 8,
+        name: "피자8",
+        price: 20000,
+        image: "https://example.com/image.jpg",
+        quantity: 1,
+        inventory: 10,
       },
     ]);
   }, []);
+  const deleteItem = (id: number) => {
+    if (!ShoppingList) return;
+    const updateList = ShoppingList.filter((item) => item.id !== id);
+    setShoppingList(updateList);
+  };
+  const increase = (id: number) => {
+    if (!ShoppingList) return;
+    const updateList = ShoppingList.map((item) =>
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    );
+    setShoppingList(updateList);
+  };
+
+  const decrease = (id: number) => {
+    if (!ShoppingList) return;
+    const updateList = ShoppingList.map((item) =>
+      item.id === id && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+    setShoppingList(updateList);
+  };
   return (
     <Wrapper>
       <ShoppingHeader
         text="장바구니"
         goBack={() => {
-          navigate("/list");
+          navigate("/menulist");
         }}
       />
       {ShoppingList == null ? (
@@ -46,7 +122,15 @@ const ShoppingCartPage = () => {
         </ShoppingListEmpty>
       ) : (
         <ShoppingListWrapper>
-          <ShoppingItem />
+          {ShoppingList.map((item) => (
+            <ShoppingItem
+              key={item.id}
+              item={item}
+              onIncrease={() => increase(item.id)}
+              onDecrease={() => decrease(item.id)}
+              deleteItem={() => deleteItem(item.id)}
+            />
+          ))}
         </ShoppingListWrapper>
       )}
       <ShoppingFooter />
@@ -56,6 +140,11 @@ const ShoppingCartPage = () => {
             text="테이블 이용료 주문이 필요해요!"
             confirm={() => {}}
           ></ConfirmModal>
+        </DarkWrapper>
+      )}
+      {isSendMoneyModal && (
+        <DarkWrapper>
+          <SendMoneyModal></SendMoneyModal>
         </DarkWrapper>
       )}
     </Wrapper>
@@ -88,6 +177,8 @@ const ShoppingListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-height: calc(100vh - 140px - 100px - 2em);
+  overflow-y: auto;
 `;
 
 const DarkWrapper = styled.div`

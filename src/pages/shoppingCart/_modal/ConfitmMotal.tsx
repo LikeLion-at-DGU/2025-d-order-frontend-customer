@@ -7,14 +7,12 @@ const ConfirmModal = ({
   confirm: () => void;
 }) => {
   return (
-    <>
-      <ModalContainer>
-        <div>{text}</div>
-        <div>
-          <button onClick={confirm}>확인</button>
-        </div>
-      </ModalContainer>
-    </>
+    <ModalContainer>
+      <div>{text}</div>
+      <div>
+        <button onClick={confirm}>확인</button>
+      </div>
+    </ModalContainer>
   );
 };
 
