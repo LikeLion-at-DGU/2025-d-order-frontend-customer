@@ -1,5 +1,7 @@
 import * as S from './MenuItem.styled';
 
+import { MENULISTPAGE_CONSTANTS } from '@pages/menulistpage/constants/menulistpageconstants';
+
 type Category = 'menu' | 'tableFee' | 'drink';
 
 interface ItemType {
@@ -30,7 +32,13 @@ const MenuItem = ({ item, onClick }: MenuItemProps) => {
       onClick={handleClick}
     >
       <S.Row>
-        <S.MenuImage src={item.imageUrl} />
+        <S.MenuImage
+          src={item.imageUrl}
+          onError={(e) => {
+            e.currentTarget.src =
+              MENULISTPAGE_CONSTANTS.MENUITEMS.IMAGES.NONIMAGE;
+          }}
+        />
         <S.Col>
           <S.ItemName>{item.name}</S.ItemName>
           <S.ItemDes $soldout={item.soldOut}>
