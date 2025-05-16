@@ -76,6 +76,15 @@ const useMenuListPage = () => {
       let activeCategory: 'tableFee' | 'menu' | 'drink' | null = null;
       let maxTop = -Infinity;
 
+      const scrollTop = window.scrollY;
+      const scrollBottom = scrollTop + window.innerHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+
+      if (pageHeight - scrollBottom < 10) {
+        setSelectedCategory('drink');
+        return;
+      }
+
       Object.entries(sectionRefs).forEach(([key, ref]) => {
         if (ref.current) {
           const rectTop = ref.current.getBoundingClientRect().top;
