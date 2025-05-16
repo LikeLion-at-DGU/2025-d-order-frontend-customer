@@ -1,0 +1,60 @@
+name: Discord PR Notification
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+    types: [opened, synchronize, reopened, closed]
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+    steps:
+      - name: Send PR embed message to Discord
+        run: |
+          ACTION_TYPE="${{ github.event.action }}"
+          IS_MERGED="${{ github.event.pull_request.merged }}"
+          BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+
+          TITLE="📌 PR 이벤트: ${{ github.event.pull_request.title }}"
+          COLOR=15844367  # 주황
+
+          if [ "$ACTION_TYPE" = "closed" ] && [ "$IS_MERGED" = "true" ]; then
+            if [ "$BASE_BRANCH" = "main" ]; then
+              TITLE="🎉 🚀 **배포 완료! (main 머지)**: ${{ github.event.pull_request.title }}"
+              COLOR=5763719  # 파랑
+            else
+              TITLE="✅ PR 머지 완료: ${{ github.event.pull_request.title }}"
+              COLOR=3066993  # 초록
+            fi
+          fi
+
+          curl -H "Content-Type: application/json" \
+               -X POST "$DISCORD_WEBHOOK" \
+               -d "{
+                \"username\": \"GitHub Actions\",
+                \"avatar_url\": \"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png\",
+                \"embeds\": [{
+                  \"title\": \"${TITLE}\",
+                  \"color\": ${COLOR},
+                  \"fields\": [
+                    {
+                      \"name\": \"📂 브랜치\",
+                      \"value\": \"${{ github.event.pull_request.head.ref }} → ${{ github.event.pull_request.base.ref }}\"
+                    },
+                    {
+                      \"name\": \"👤 작성자\",
+                      \"value\": \"${{ github.actor }}\",
+                      \"inline\": true
+                    },
+                    {
+                      \"name\": \"🔗 PR 링크\",
+                      \"value\": \"[PR 보기](${{ github.event.pull_request.html_url }})\"
+                    }
+                  ],
+                  \"timestamp\": \"$(date --iso-8601=seconds)\"
+                }]
+              }"
