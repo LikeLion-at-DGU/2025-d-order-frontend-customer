@@ -3,9 +3,23 @@ import test from "@assets/images/character.svg";
 import close from "@assets/icons/close.svg";
 import plus from "@assets/icons/plus.svg";
 import minus from "@assets/icons/minus.svg";
+import minusDisavle from "@assets/icons/minusDisable.svg";
 import Line from "@assets/images/Line3.svg";
+import { ShoppingItemType } from "../types/types";
 
-const ShoppingItem = () => {
+interface ShoppingListProps {
+  item: ShoppingItemType;
+  onIncrease: () => void;
+  onDecrease: () => void;
+  deleteItem: () => void;
+}
+
+const ShoppingItem = ({
+  item,
+  onIncrease,
+  onDecrease,
+  deleteItem,
+}: ShoppingListProps) => {
   return (
     <>
       <ShoppingItemWrapper>
@@ -14,27 +28,30 @@ const ShoppingItem = () => {
         </div>
         <div className="itemContainer">
           <div className="contentWrapper">
-            <ItemText>피자</ItemText>
-            <button>
+            <ItemText>{item.name}</ItemText>
+            <button onClick={deleteItem}>
               <img src={close} alt="장바구니에서 지우기 버튼" />
             </button>
           </div>
 
           <div className="contentWrapper">
-            <PriceText>20,000원</PriceText>
+            <PriceText>{item.price}원</PriceText>
             <AmountWrapper>
-              <button>
-                <img src={minus} alt="수량 감소" />
+              <button onClick={onDecrease} disabled={item.quantity === 1}>
+                <img
+                  src={item.quantity === 1 ? minusDisavle : minus}
+                  alt="수량 감소"
+                />
               </button>
-              <AmountText>1</AmountText>
-              <button>
+              <AmountText>{item.quantity}</AmountText>
+              <button onClick={onIncrease}>
                 <img src={plus} alt="수량 증가" />
               </button>
             </AmountWrapper>
           </div>
         </div>
       </ShoppingItemWrapper>
-      <img src={Line} alt="" style={{ width: "100%" }} />
+      <img src={Line} alt="구분선" style={{ width: "100%" }} />
     </>
   );
 };
@@ -80,6 +97,10 @@ const AmountWrapper = styled.div`
     align-items: center;
     background-color: rgba(255, 110, 63, 0.3);
     border-radius: 50%;
+
+    &:disabled {
+      background-color: rgba(192, 192, 192, 0.2);
+    }
   }
 `;
 
