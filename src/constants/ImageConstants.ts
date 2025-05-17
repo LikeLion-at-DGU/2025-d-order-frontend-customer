@@ -3,6 +3,7 @@ import Character from '../assets/images/character.svg';
 import Logo from '../assets/icons/Logo.svg';
 import Cart from '../assets/icons/cart.svg';
 import Receipt from '../assets/icons/receipt.svg';
+import LogoPng from '../assets/icons/Logo.png';
 
 export const IMAGE_CONSTANTS = {
   Notice: Notice,
@@ -10,4 +11,5 @@ export const IMAGE_CONSTANTS = {
   LOGO: Logo,
   CART: Cart,
   RECEIPT: Receipt,
+  LOGOPNG: LogoPng,
 };

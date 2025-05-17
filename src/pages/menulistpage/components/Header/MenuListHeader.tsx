@@ -10,7 +10,7 @@ interface MenuListHeaderProps {
 const MenuListHeader = ({ onNavigate, onReceipt }: MenuListHeaderProps) => {
   return (
     <S.Wrapper>
-      <S.Logo src={MENULISTPAGE_CONSTANTS.HEADER.IMAGE.LOGO} />
+      <S.Logo src={MENULISTPAGE_CONSTANTS.HEADER.IMAGE.LOGOPNG} />
       <S.Icons>
         <S.Icon
           src={MENULISTPAGE_CONSTANTS.HEADER.IMAGE.RECEIPT}
