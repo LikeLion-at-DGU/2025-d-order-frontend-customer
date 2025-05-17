@@ -29,7 +29,7 @@ export const Title = styled.div`
 
 export const TableNumber = styled.div`
   ${({ theme }) => theme.fonts.Bold14};
-  color: ${({ theme }) => theme.colors.Black02};
+  color: ${({ theme }) => theme.colors.Orange01};
 `;
 
 export const SelectCategory = styled.div`
