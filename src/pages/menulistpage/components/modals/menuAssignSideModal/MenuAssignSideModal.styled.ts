@@ -3,17 +3,19 @@ import styled, { keyframes } from 'styled-components';
 const bounceUpSmooth = keyframes`
   0% {
     opacity: 0;
-    transform: translate(-50%, 100%);
+    transform: translate(-50%, 100%) scale(0.95);
+    filter: blur(6px);
   }
-  50% {
+  45% {
     opacity: 1;
-    transform: translate(-50%, -12px);
+    transform: translate(-50%, 0px) scaleY(1.06);
+    filter: blur(0px);
   }
-  80% {
-    transform: translate(-50%, 4px);
+  75% {
+    transform: translate(-50%, 0px) scaleY(0.98);
   }
   100% {
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0) scale(1);
   }
 `;
 

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { MenuListPageService } from '../_Dummy/MenuListPageService';
+import { ROUTE_CONSTANTS } from '@constants/RouteConstants';
 
 const SCROLL_OFFSET = 120;
 
@@ -117,8 +118,8 @@ const useMenuListPage = () => {
       setIsModalOpen(false);
       setSelectedItem(null);
       setIsClosing(false);
+      setIsModalOpen2(true);
     }, 300);
-    setIsModalOpen2(true);
   };
 
   const handleFirstModal = () => {
@@ -143,8 +144,8 @@ const useMenuListPage = () => {
     handleSubmitItem,
     handleFirstModal,
     handleSecondModal,
-    handleNavigate: () => navigate('/'),
-    handleReceipt: () => navigate('/'),
+    handleNavigate: () => navigate(ROUTE_CONSTANTS.RESERVATION),
+    handleReceipt: () => navigate(ROUTE_CONSTANTS.RECEIPT),
     count,
     isMin,
     isMax,

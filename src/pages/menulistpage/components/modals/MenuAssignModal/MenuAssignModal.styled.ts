@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 const slideDown = keyframes`
   0% {
@@ -17,17 +17,19 @@ const slideDown = keyframes`
 const bounceUpSmooth = keyframes`
   0% {
     opacity: 0;
-    transform: translate(-50%, 100%);
+    transform: translate(-50%, 100%) scale(0.95);
+    filter: blur(6px);
   }
-  50% {
+  45% {
     opacity: 1;
-    transform: translate(-50%, -12px);
+    transform: translate(-50%, 0px) scaleY(1.06);
+    filter: blur(0px);
   }
-  80% {
-    transform: translate(-50%, 4px);
+  75% {
+    transform: translate(-50%, 0px) scaleY(0.98);
   }
   100% {
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0) scale(1);
   }
 `;
 
@@ -72,8 +74,15 @@ export const ModalWrap = styled.div<{ $isClosing?: boolean }>`
   border-radius: 30px 30px 0px 0px;
 
   transform-origin: bottom center;
-  animation: ${({ $isClosing }) => ($isClosing ? slideOutDown : bounceUpSmooth)}
-    0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+  ${({ $isClosing }) =>
+    $isClosing
+      ? css`
+          animation: ${slideOutDown} 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+        `
+      : css`
+          animation: ${bounceUpSmooth} 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        `}
 `;
 
 export const Col = styled.div`
