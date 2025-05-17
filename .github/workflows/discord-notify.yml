@@ -1,7 +1,7 @@
 name: Discord PR Notification
 
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - develop
       - main
@@ -13,7 +13,13 @@ jobs:
     env:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
-      - name: Send PR embed message to Discord
+      - name: Send PR embed message to Discord (only trusted users)
+        if: |
+          github.actor == 'taejun0' ||
+          github.actor == 'sem201' ||
+          github.actor == 'pedro0527' ||
+          github.actor == 'nicerjs23' ||
+          github.actor == 'gn00py48'
         run: |
           ACTION_TYPE="${{ github.event.action }}"
           IS_MERGED="${{ github.event.pull_request.merged }}"
