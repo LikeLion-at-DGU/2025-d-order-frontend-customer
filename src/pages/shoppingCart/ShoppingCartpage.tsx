@@ -8,14 +8,17 @@ import ShoppingFooter from "./_components/ShoppingFooter";
 import ConfirmModal from "./_modal/ConfitmMotal";
 import { ShoppingItemType } from "./types/types";
 import SendMoneyModal from "./_modal/sendMoneyModal";
+import CopyModal from "./_modal/CopyModal";
+import { AnimatePresence } from "framer-motion";
 
 const ShoppingCartPage = () => {
   const [ShoppingList, setShoppingList] = useState<ShoppingItemType[] | null>(
     null
   );
   const navigate = useNavigate();
-  const [isConfirmModal, _setisConfirmModal] = useState<boolean>(false);
-  const [isSendMoneyModal, _setIsSendMoneyModal] = useState<boolean>(true);
+  const [isConfirmModal, setisConfirmModal] = useState<boolean>(false);
+  const [isSendMoneyModal, setIsSendMoneyModal] = useState<boolean>(true);
+  const [isCopyModal, setIsCopyModal] = useState<boolean>(false);
 
   useEffect(() => {
     setShoppingList([
@@ -85,6 +88,8 @@ const ShoppingCartPage = () => {
       },
     ]);
   }, []);
+
+  // 상품 리스트 관리 함수
   const deleteItem = (id: number) => {
     if (!ShoppingList) return;
     const updateList = ShoppingList.filter((item) => item.id !== id);
@@ -106,6 +111,33 @@ const ShoppingCartPage = () => {
         : item
     );
     setShoppingList(updateList);
+  };
+
+  // 상품 모달 관리
+  const CloseModal = () => {
+    setisConfirmModal(false);
+  };
+  const CloseAcoountModal = () => {
+    setIsSendMoneyModal(false);
+  };
+
+  // 계좌 페이지 이동
+  const Pay = () => {
+    setIsSendMoneyModal(false);
+    navigate("confirm-pay");
+  };
+
+  // 계좌 복사 버튼
+  const CopyAccount = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setIsCopyModal(true);
+      setTimeout(() => {
+        setIsCopyModal(false);
+      }, 2000);
+    } catch {
+      alert("다시 시도해주세요");
+    }
   };
   return (
     <Wrapper>
@@ -138,13 +170,20 @@ const ShoppingCartPage = () => {
         <DarkWrapper>
           <ConfirmModal
             text="테이블 이용료 주문이 필요해요!"
-            confirm={() => {}}
+            confirm={() => {
+              CloseModal;
+            }}
           ></ConfirmModal>
         </DarkWrapper>
       )}
       {isSendMoneyModal && (
         <DarkWrapper>
-          <SendMoneyModal></SendMoneyModal>
+          <SendMoneyModal
+            canclePay={CloseAcoountModal}
+            pay={Pay}
+            copyAccount={(text: string) => CopyAccount(text)}
+          />
+          <AnimatePresence>{isCopyModal && <CopyModal />}</AnimatePresence>
         </DarkWrapper>
       )}
     </Wrapper>

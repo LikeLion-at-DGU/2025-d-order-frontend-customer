@@ -6,7 +6,15 @@ interface TotalAccount {
   account: string;
   totalPrice: string;
 }
-const SendMoneyModal = () => {
+const SendMoneyModal = ({
+  canclePay,
+  pay,
+  copyAccount,
+}: {
+  canclePay: () => void;
+  pay: () => void;
+  copyAccount: (text: string) => void;
+}) => {
   const account: TotalAccount = {
     depositor: "황민영",
     account: "국민은행 12340000000",
@@ -29,7 +37,7 @@ const SendMoneyModal = () => {
           <Text>계좌</Text>
           <div>
             <Text2>{account.account}</Text2>
-            <button>
+            <button onClick={() => copyAccount(account.account)}>
               <img src={copy} alt="계좌 복사 버튼" />
             </button>
           </div>
@@ -40,8 +48,8 @@ const SendMoneyModal = () => {
         </div>
       </ModalBody>
       <ModalConfirm>
-        <button>취소</button>
-        <button>직원 확인</button>
+        <button onClick={canclePay}>취소</button>
+        <button onClick={pay}>직원 확인</button>
       </ModalConfirm>
     </ModalContainer>
   );
